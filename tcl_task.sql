@@ -12,6 +12,8 @@ ALTER TABLE scam_info MODIFY COLUMN scammed_pincode int
 ALTER TABLE scam_info MODIFY COLUMN scammer_pincode int
 ALTER TABLE scam_info MODIFY COLUMN scam_amount_Rs int
 SELECT * FROM scam_info
+desc scam_info;
+TRUNCATE TABLE scam_info;
 INSERT INTO scam_info values(1,'phone scams',31000,9807654567,'Bangalore','Prema',61130704,'bangalore','mangalore',2024,564567,564323,'SBI','bangalore')
 INSERT INTO scam_info values(2,'email scams',28000,08076274623,'Amaravati','Ramkumar',62230704,'mangalore','gandhinagar',2023,567487,567867,'ICICI','mangalore')
 INSERT INTO scam_info values(3,'investment scams',23000,9988998899,'Panaji','Shashi',6113074,'chennai','bangalore',2023,567483,563487,'City bank','chennai')
@@ -47,3 +49,134 @@ SELECT * FROM scam_info where id in (5,6,9,7,10);
 SELECT * FROM scam_info where id not in (7,10);
 SELECT * FROM scam_info where id=8 AND id=1;
 SELECT * FROM scam_info where id=8 OR id=1;
+
+
+
+CONSTRAINTS:
+1) NOT NULL:
+
+CREATE TABLE movies(id int not null, movie_name varchar(20) unique,
+budget bigint, release_date datetime,movie_language varchar(20),
+created_at timestamp, created_by varchar(20),
+modified_at timestamp, modified_by varchar(20));
+
+
+SELECT * FROM movies;
+INSERT INTO movies values(1,'raayan',500000,
+'2024-07-26 06:30:20','KANNADA', now(),'dhanush', now(), 'arrahaman');
+INSERT INTO movies values(2,'om',900000,
+'2024-08-26 06:30:20','KANNADA', now(),'upendra', now(), 'rgv');
+select * from movies;
+ALTER TABLE movies MODIFY COLUMN movie_language 
+varchar(20) not null;
+desc movies;
+
+ALTER TABLE movies modify column movie_name 
+varchar(20);
+
+INSERT INTO movies values(3,null,800000,
+'2024-09-26 06:30:20','KANNADA', now(),
+'osama', now(), 'ranjith');
+select * from movies;
+desc movies;
+
+ALTER TABLE movies modify column movie_name 
+varchar(20) not null;
+
+unique:
+
+
+
+CREATE TABLE actor(id int not null unique, 
+actor_name varchar(20) unique, sal bigint,
+age int, loc varchar(20) not null unique,
+created_at timestamp, created_by varchar(20),
+modified_at timestamp, modified_by varchar(20));
+
+select * from actor;
+
+desc actor;
+INSERT INTO actor values(1,'darshan', 600000,50,
+'rrnagar', now(), 'abc', now(), 'xyz');
+
+INSERT INTO actor values(2,'yash', 100000,40,
+'kgf', now(), 'abc', now(), 'xyz');
+
+ALTER TABLE table_name add constraint 
+constraint_name constraint_type(column_name);
+
+ALTER TABLE actor add constraint sal_uni
+unique(sal);
+desc actor;
+
+
+
+
+
+
+
+CREATE TABLE weapons(id int not null,
+w_name varchar(20), cost bigint,
+w_user varchar(20), constraint w_user_uni unique(w_user),
+constraint w_name_uni unique(w_name));
+desc weapons;
+
+INSERT INTO weapons values(1,'ak47',30000,'hari');
+INSERT INTO weapons values(2,'M416',20000,'chethan');
+INSERT INTO weapons values(3,'uzi',10000,'ajay');
+INSERT INTO weapons values(4,null,50000,'yashwant');
+
+select * from weapons;
+
+check:
+
+CREATE TABLE stadium(id int not null unique,
+st_name varchar(20), capacity int, loc varchar(20),
+constraint loc_uni unique(loc),
+constraint cap_chk check(capacity > 20000));
+
+select * from stadium;
+INSERT INTO stadium values(1,'mChinnaswamy',45000,'MGROAD');
+INSERT INTO stadium values(2,'chepauk',25000,'chennai');
+
+
+
+
+
+CREATE TABLE social_media(id int,
+app_name varchar(20), app_color varchar(10),
+no_of_users int,constraint users_chk 
+check(no_of_users >=100));
+
+INSERT INTO social_media values(1,'INSTA','pink',
+200);
+
+INSERT INTO social_media values(2,'whatsapp','green',
+2000);
+INSERT INTO social_media values(3,'telegram','blue',
+20);
+select * from social_media;
+
+ALTER TABLE social_media modify id int not null,
+drop constraint users_chk;
+
+ALTER TABLE social_media add constraint app_name_uni
+unique(app_name),add constraint users_chk check(no_of_users > 10 and no_of_users <3000);
+
+ALTER TABLE social_media modify column id int,
+drop constraint app_name_uni, drop constraint users_chk;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
