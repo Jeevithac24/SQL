@@ -34,12 +34,22 @@ INSERT INTO state_info values(19,'Telangana',31,'Hyderabad',224,28,12,'Telgu',61
 INSERT INTO state_info values(20,'Uttar Pradesh',31,'Lucknow',224,28,12,'Hindi',61130704,191791,332926,'lotus','elephant',87,'UP')
 UPDATE state_info SET s_population=23450987 where id=18
 UPDATE state_info SET s_population=98769876 where id=20
-UPDATE state_info SET s_population=23450987 where id=18
-UPDATE state_info SET s_population=23450987 where id=18
-UPDATE state_info SET s_population=23450987 where id=18
-UPDATE state_info SET s_population=23450987 where id=18
-UPDATE state_info SET s_population=23450987 where id=18
-UPDATE state_info SET s_population=23450987 where id=18
-UPDATE state_info SET s_population=23450987 where id=18s
-UPDATE state_info SET s_population=23450987 where id=18
+UPDATE state_info SET s_area_squarekm=23450987 where id=16
+UPDATE state_info SET s_per_capita=56784 where id=17
+UPDATE state_info SET s_literacyrate_percentage=67 where id=19
+UPDATE state_info SET s_literacyrate_percentage=87 where id=16
+UPDATE state_info SET no_of_rajyasabha_member=22 where id=18
+UPDATE state_info SET no_of_lokasabha_seats=6 where id=17
+UPDATE state_info SET no_of_assembly_seats=567 where id=15
+UPDATE state_info SET s_population=345345 where id=17
+SELECT * FROM state_info
+DELETE FROM state_info WHERE id=12;
+DELETE FROM state_info WHERE id=10;
+DELETE FROM state_info WHERE s_vehicle_registration='JH';
+ROLLBACK
+SELECT * FROM state_info where id in (5,6,9,7,10);
+SELECT * FROM state_info where id not in (7,10);
+SELECT * FROM state_info where id=8 AND id=1;
+SELECT * FROM state_info where id=8 OR id=1;
+
 
